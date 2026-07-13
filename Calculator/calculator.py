@@ -10,7 +10,7 @@ def calculate(n1, n2, choice: str):
         return n1 * n2
     
     elif choice == "/":
-        if n2 == 0:
+        if n2 == 0:  
             return "Error: Division by zero!"
         return n1 / n2
 
@@ -18,7 +18,7 @@ def calculate(n1, n2, choice: str):
 def get_number(prompt: str) -> float:
     while True:
         try:
-            return float(input(prompt))
+            return float(input(prompt).strip())
         except ValueError:
             print("Error, You Must Write a Number Only")
 
@@ -32,7 +32,7 @@ num2 = get_number("Enter The 2nd Number:  ")
 
 
 while True:
-    choice = input("Choose The Action (+, -, *, /):  ")
+    choice = input("Choose The Action (+, -, *, /):  ").strip()
     
     if choice in ["+", "-", "*", "/"]:
         break  

@@ -4,7 +4,7 @@ from random import randint
 def get_number(prompt: str) -> int:
     while True:
         try:
-            return int(input(prompt))
+            return int(input(prompt).strip())
         except ValueError:
             print("Error, You Must Write an Integer only")
 
