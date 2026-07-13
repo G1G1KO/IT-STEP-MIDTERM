@@ -23,6 +23,10 @@ def get_number(prompt: str) -> float:
             print("Error, You Must Write a Number Only")
 
 
+
+#მთავარი პროგრამა
+print("="*10, "Calculator", "="*10,"\n")
+
 num1 = get_number("Enter The 1st Number:  ")
 num2 = get_number("Enter The 2nd Number:  ")
 
