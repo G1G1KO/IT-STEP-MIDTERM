@@ -29,6 +29,8 @@ def get_char(prompt: str) -> str:
         else:
             print("Error: The character must be exactly one letter and cannot be a number/symbol!")
 
+
+
 secret_word = choice(words)
 user_lives = 10
 
