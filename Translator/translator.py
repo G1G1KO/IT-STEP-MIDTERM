@@ -75,18 +75,27 @@ else:
     # უნდა თუ არა მომხმარებელს სიტყვის ბაზაში შენახვა
     add_choice = input("Would you like to add this word to the database? (y/n): ").strip().lower()
     
-    if add_choice == "y":
-        new_translation = input(f"Enter the translation for '{word_to_translate}' in {language_map[second_choice_num]['name']}: ").strip().lower()
+    if add_choice == 'y':
+        while True:
+            new_translation = input(f"Enter the translation for '{word_to_translate}' in {language_map[second_choice_num]['name']}: ").strip().lower()
+            
+            if not new_translation:
+                print("Translation cannot be empty. Try again.")
+                continue
+            
+            # ვამოწმებთ, რომ თარგმანი შეიცავდეს მხოლოდ ასოებს (და არა ციფრებს)
+            if new_translation.isalpha():
+                break
+            else:
+                print("Error: The translation must contain letters only (no numbers or symbols)!")
         
-        if new_translation.isalpha():
-            # ვამატებთ ახალ სიტყვას ლოკალურ ლექსიკონში
-            translation_db[translation_direction][word_to_translate] = new_translation
-
-            with open("Translator/tanslations.json", "w", encoding="utf-8") as file:
-                json.dump(translation_db, file, indent=2, ensure_ascii=False)
-            print(f"Successfully added! '{word_to_translate}' -> '{new_translation}' is now saved.")
+        # ვამატებთ ახალ სიტყვას ლოკალურ ლექსიკონში
+        translation_db[translation_direction][word_to_translate] = new_translation
         
-        else:
-            print("Translation cannot be empty. Word was not added.")
+        # ვინახავთ განახლებულ ბაზას JSON ფაილში
+        with open("translations.json", "w", encoding="utf-8") as file:
+            json.dump(translation_db, file, indent=4, ensure_ascii=False)
+            
+        print(f"Successfully added! '{word_to_translate}' -> '{new_translation}' is now saved.")
     else:
         print("Okay, maybe next time!")
