@@ -10,7 +10,7 @@ def get_number(prompt: str) -> int:
 
 
 secret_num = randint(1, 101)
-user_lives = 5
+user_lives = 7
 
 print("=" * 10, "Guess The Number", "=" * 10, "\n")
 
