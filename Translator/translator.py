@@ -1,7 +1,8 @@
 import json
 
+FILENAME = "Translator/tanslations.json"
 
-with open("Translator/tanslations.json", "r", encoding="utf-8") as file:
+with open(FILENAME, "r", encoding="utf-8") as file:
     translation_db = json.load(file)
 
 
@@ -28,6 +29,15 @@ def get_choice(prompt: str) -> int:
                 print(f"Error: Must enter a number between 1 and {len(language_map)}")
         except ValueError:
             print("Error: Must enter numbers only!")
+
+
+def get_yes_no(prompt: str) -> str:
+    while True:
+        choice = input(prompt).strip().lower()
+        if choice in ['y', 'n']:
+            return choice
+        print("Error: Please enter only 'y' for Yes or 'n' for No!")
+
 
 
 # --- მთავარი პროგრამა ---
@@ -73,7 +83,7 @@ else:
 
 
     # უნდა თუ არა მომხმარებელს სიტყვის ბაზაში შენახვა
-    add_choice = input("Would you like to add this word to the database? (y/n): ").strip().lower()
+    add_choice = get_yes_no("Would you like to add this word to the database? (y/n): ").strip().lower()
     
     if add_choice == 'y':
         while True:
@@ -93,8 +103,8 @@ else:
         translation_db[translation_direction][word_to_translate] = new_translation
         
         # ვინახავთ განახლებულ ბაზას JSON ფაილში
-        with open("translations.json", "w", encoding="utf-8") as file:
-            json.dump(translation_db, file, indent=4, ensure_ascii=False)
+        with open(FILENAME, "w", encoding="utf-8") as file:
+            json.dump(translation_db, file, indent=2, ensure_ascii=False)
             
         print(f"Successfully added! '{word_to_translate}' -> '{new_translation}' is now saved.")
     else:
